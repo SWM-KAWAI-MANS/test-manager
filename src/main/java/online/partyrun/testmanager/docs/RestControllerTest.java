@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
         })
 @AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureRestDocs
-public abstract class RestDocumentTest {
+public abstract class RestControllerTest {
 
     @Autowired protected MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
