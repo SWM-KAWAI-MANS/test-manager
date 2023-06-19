@@ -19,4 +19,4 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         env:
-            FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
