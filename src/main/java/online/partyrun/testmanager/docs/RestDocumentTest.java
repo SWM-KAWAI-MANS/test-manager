@@ -1,7 +1,14 @@
 package online.partyrun.testmanager.docs;
 
+import static online.partyrun.testmanager.docs.ApiDocumentUtils.getDocumentRequest;
+import static online.partyrun.testmanager.docs.ApiDocumentUtils.getDocumentResponse;
+
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.catalina.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -13,17 +20,13 @@ import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static online.partyrun.testmanager.docs.ApiDocumentUtils.getDocumentRequest;
-import static online.partyrun.testmanager.docs.ApiDocumentUtils.getDocumentResponse;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
-@WebMvcTest(excludeFilters =
-        {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AuthenticationFilter.class),
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
-        }
-)
+@WebMvcTest(
+        excludeFilters = {
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = AuthenticationFilter.class),
+            @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+        })
 @AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureRestDocs
 public abstract class RestDocumentTest {
