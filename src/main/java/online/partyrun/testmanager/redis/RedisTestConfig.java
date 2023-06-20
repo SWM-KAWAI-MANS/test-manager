@@ -16,8 +16,7 @@ import java.io.InputStreamReader;
 @Configuration
 public class RedisTestConfig {
 
-    @Value("${spring.data.redis.port}")
-    private int redisPort;
+    private int redisPort = 10000;
 
     private RedisServer redisServer;
 
