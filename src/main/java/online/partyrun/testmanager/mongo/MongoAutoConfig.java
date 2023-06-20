@@ -1,6 +1,7 @@
 package online.partyrun.testmanager.mongo;
 
 import jakarta.annotation.PostConstruct;
+
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 @AutoConfiguration
