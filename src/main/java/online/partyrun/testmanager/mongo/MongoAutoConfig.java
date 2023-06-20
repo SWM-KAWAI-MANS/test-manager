@@ -1,8 +1,12 @@
 package online.partyrun.testmanager.mongo;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
 
 @AutoConfiguration
-@PropertySource("classpath:embedded-mongo.yml")
-public class MongoAutoConfig {}
+public class MongoAutoConfig {
+    @PostConstruct
+    public void init() {
+        System.setProperty("de.flapdoodle.mongodb.embedded.version", "5.0.5");
+    }
+}
