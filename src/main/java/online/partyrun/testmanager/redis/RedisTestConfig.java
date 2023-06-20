@@ -21,8 +21,8 @@ public class RedisTestConfig {
     private int redisPort;
 
     public RedisTestConfig(
-            @Value("${spring.data.redis.port}") Integer redisPort,
-            @Value("${spring.data.redis.uri}") String redisUri) {
+            @Value("${spring.data.redis.port:#{null}}") Integer redisPort,
+            @Value("${spring.data.redis.uri:#{null}}") String redisUri) {
         this.redisPort = getMainPort(redisPort, redisUri);
     }
 
