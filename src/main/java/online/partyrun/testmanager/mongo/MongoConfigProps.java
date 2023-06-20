@@ -2,12 +2,11 @@ package online.partyrun.testmanager.mongo;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 
 @Getter
 @Setter
-@ConfigurationProperties("de.flapdoodle.mongodb.embedded")
+@PropertySource("classpath:application.properties")
 public class MongoConfigProps {
     private String version;
 }
