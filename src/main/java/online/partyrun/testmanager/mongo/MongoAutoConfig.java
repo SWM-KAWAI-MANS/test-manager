@@ -1,15 +1,14 @@
 package online.partyrun.testmanager.mongo;
 
-import de.flapdoodle.embed.mongo.distribution.IFeatureAwareVersion;
-import de.flapdoodle.embed.mongo.distribution.Version;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Getter
+@Setter
 @AutoConfiguration
+@ConfigurationProperties("de.flapdoodle.mongodb.embedded")
 public class MongoAutoConfig {
-    @Bean
-    public IFeatureAwareVersion version() {
-        return Version.V6_0_6;
-    }
+    private String version;
 }

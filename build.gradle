@@ -24,19 +24,23 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
+    implementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
+    implementation 'org.springframework.security:spring-security-test:6.1.0'
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0'
+    implementation 'com.github.phjppo0918:spring-security-authorization-manager:0.0.1-alpha'
+    implementation('it.ozimov:embedded-redis:0.7.3') {
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
+    }
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.1.0'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
+
     compileOnly 'org.projectlombok:lombok:1.18.26'
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
     testCompileOnly 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
-    implementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
-    implementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
-    implementation 'org.springframework.security:spring-security-test:6.1.0'
-    implementation ('it.ozimov:embedded-redis:0.7.3') {
-        exclude group: 'org.slf4j', module: 'slf4j-simple'
-    }
-    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0'
-    implementation 'com.github.phjppo0918:spring-security-authorization-manager:0.0.1-alpha'
 }
 
 tasks.named('test') {
