@@ -5,5 +5,4 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @AutoConfiguration
 @EnableConfigurationProperties(MongoConfigProps.class)
-public class MongoAutoConfig {
-}
+public class MongoAutoConfig {}
