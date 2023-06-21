@@ -2,9 +2,14 @@ package online.partyrun.testmanager.docs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import online.partyrun.springsecurityauthorizationmanager.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -13,12 +18,18 @@ import static online.partyrun.testmanager.docs.ApiDocumentUtils.getDocumentRespo
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@WebMvcTest
+@WebMvcTest(
+        excludeFilters = {
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = AuthenticationFilter.class),
+            @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+        })
+@AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureRestDocs
-public abstract class RestControllerTest {
+public abstract class RestControllerNoneAuthTest {
 
-    @Autowired
-    protected MockMvc mockMvc;
+    @Autowired protected MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
 
     protected String toRequestBody(Object value) throws JsonProcessingException {
