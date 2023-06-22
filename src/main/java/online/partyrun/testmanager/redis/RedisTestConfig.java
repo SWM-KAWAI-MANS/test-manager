@@ -21,7 +21,8 @@ public class RedisTestConfig {
 
     public RedisTestConfig(
             @Value("${spring.data.redis.port:#{null}}") Integer redisPort,
-            @Value("${spring.data.redis.uri:#{null}}") String redisUri) throws IOException {
+            @Value("${spring.data.redis.uri:#{null}}") String redisUri)
+            throws IOException {
 
         final int mainPort = getMainPort(redisPort, redisUri);
         redisServer = new RedisServer(mainPort);
@@ -35,7 +36,6 @@ public class RedisTestConfig {
         if (StringUtils.hasText(redisUri)) {
             return getTestServerPort(URI.create(redisUri).getPort());
         }
-
 
         return getTestServerPort(6379);
     }
@@ -63,7 +63,7 @@ public class RedisTestConfig {
         String line;
 
         try (BufferedReader input =
-                     new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 
             while ((line = input.readLine()) != null) {
                 pidInfo.append(line);

@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import online.partyrun.springsecurityauthorizationmanager.JwtAuthenticationFilter;
 import online.partyrun.springsecurityauthorizationmanager.SecurityConfig;
 
@@ -24,7 +25,8 @@ import org.springframework.test.web.servlet.ResultActions;
         excludeFilters = {
             @ComponentScan.Filter(
                     type = FilterType.ASSIGNABLE_TYPE,
-                    classes = {JwtAuthenticationFilter.class, SecurityConfig.class})})
+                    classes = {JwtAuthenticationFilter.class, SecurityConfig.class})
+        })
 @AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureRestDocs
 public abstract class RestControllerNoneAuthTest {
