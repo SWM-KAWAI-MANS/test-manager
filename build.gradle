@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
     implementation 'org.springframework.security:spring-security-test:6.1.0'
     implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0'
-    implementation 'com.github.phjppo0918:spring-security-authorization-manager:1.0.0'
+    implementation 'com.github.SWM-KAWAI-MANS:spring-security-authorization-manager:1.0.0'
     implementation('it.ozimov:embedded-redis:0.7.3') {
         exclude group: 'org.slf4j', module: 'slf4j-simple'
     }
