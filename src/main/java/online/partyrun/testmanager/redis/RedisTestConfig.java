@@ -17,44 +17,37 @@ import java.util.Objects;
 
 @Configuration
 public class RedisTestConfig {
-
-    private int redisPort;
+    RedisServer redisServer;
 
     public RedisTestConfig(
             @Value("${spring.data.redis.port:#{null}}") Integer redisPort,
-            @Value("${spring.data.redis.uri:#{null}}") String redisUri) {
-        this.redisPort = getMainPort(redisPort, redisUri);
+            @Value("${spring.data.redis.uri:#{null}}") String redisUri) throws IOException {
+
+        final int mainPort = getMainPort(redisPort, redisUri);
+        redisServer = new RedisServer(mainPort);
     }
 
-    private int getMainPort(Integer redisPort, String redisUri) {
+    private int getMainPort(Integer redisPort, String redisUri) throws IOException {
         if (Objects.nonNull(redisPort)) {
-            return redisPort;
+            return getTestServerPort(redisPort);
         }
 
         if (StringUtils.hasText(redisUri)) {
-            return URI.create(redisUri).getPort();
+            return getTestServerPort(URI.create(redisUri).getPort());
         }
 
-        return 6379;
+
+        return getTestServerPort(6379);
     }
 
-    private RedisServer redisServer;
-
-    @PostConstruct
-    public void redisServer() throws IOException {
-        final int port = getTestServerPort();
-        redisServer = new RedisServer(port);
-        redisServer.start();
-    }
-
-    private int getTestServerPort() throws IOException {
-        final Process redisProcess = executeGrepProcessCommand(redisPort);
+    private int getTestServerPort(int userPort) throws IOException {
+        final Process redisProcess = executeGrepProcessCommand(userPort);
 
         if (isRunning(redisProcess)) {
             return findAvailablePort();
         }
 
-        return redisPort;
+        return userPort;
     }
 
     /** 해당 port를 사용중인 프로세스 확인하는 sh 실행 */
@@ -70,7 +63,7 @@ public class RedisTestConfig {
         String line;
 
         try (BufferedReader input =
-                new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                     new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 
             while ((line = input.readLine()) != null) {
                 pidInfo.append(line);
@@ -95,8 +88,13 @@ public class RedisTestConfig {
         throw new IllegalArgumentException("Not Found Available port: 10000 ~ 65535");
     }
 
+    @PostConstruct
+    public void startRedisServer() {
+        redisServer.start();
+    }
+
     @PreDestroy
-    public void stopRedis() {
+    public void stopRedisServer() {
         if (redisServer != null) {
             redisServer.stop();
         }
