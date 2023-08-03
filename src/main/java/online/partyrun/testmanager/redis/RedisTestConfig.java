@@ -21,20 +21,20 @@ public class RedisTestConfig {
 
     public RedisTestConfig(
             @Value("${spring.data.redis.port:#{null}}") Integer redisPort,
-            @Value("${spring.data.redis.uri:#{null}}") String redisUri)
+            @Value("${spring.data.redis.url:#{null}}") String redisUrl)
             throws IOException {
 
-        final int mainPort = getMainPort(redisPort, redisUri);
+        final int mainPort = getMainPort(redisPort, redisUrl);
         redisServer = new RedisServer(mainPort);
     }
 
-    private int getMainPort(Integer redisPort, String redisUri) throws IOException {
+    private int getMainPort(Integer redisPort, String redisUrl) throws IOException {
         if (Objects.nonNull(redisPort)) {
             return getTestServerPort(redisPort);
         }
 
-        if (StringUtils.hasText(redisUri)) {
-            return getTestServerPort(URI.create(redisUri).getPort());
+        if (StringUtils.hasText(redisUrl)) {
+            return getTestServerPort(URI.create(redisUrl).getPort());
         }
 
         return getTestServerPort(6379);
