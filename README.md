@@ -24,7 +24,7 @@ repositories {
 2. Add the jwt-manager dependency to your app-level build.gradle file:
 ```
 dependencies {
-	      testImplementation 'com.github.SWM-KAWAI-MANS:test-manager:1.0.0'
+	      testImplementation 'com.github.SWM-KAWAI-MANS:test-manager:1.0.2'
 }
 ```
 
