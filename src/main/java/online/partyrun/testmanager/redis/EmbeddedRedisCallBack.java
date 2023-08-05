@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.util.StringUtils;
+
 import redis.embedded.RedisServer;
 
 import java.io.BufferedReader;
@@ -38,7 +39,7 @@ public class EmbeddedRedisCallBack implements BeforeAllCallback, AfterAllCallbac
         String line;
 
         try (BufferedReader input =
-                     new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 
             while ((line = input.readLine()) != null) {
                 pidInfo.append(line);
