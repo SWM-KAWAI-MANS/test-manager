@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.util.StringUtils;
+
 import redis.embedded.RedisServer;
 
 import java.io.BufferedReader;
@@ -26,7 +27,8 @@ public class EmbeddedRedisCallBack implements BeforeAllCallback, AfterAllCallbac
         final Process redisProcess = executeGrepProcessCommand(EMBEDDED_REDIS_PORT);
 
         if (isRunning(redisProcess)) {
-            throw new IllegalArgumentException(String.format("Redis를 위한 %d번 port는 이미 사용중입니다.", EMBEDDED_REDIS_PORT));
+            throw new IllegalArgumentException(
+                    String.format("Redis를 위한 %d번 port는 이미 사용중입니다.", EMBEDDED_REDIS_PORT));
         }
 
         return EMBEDDED_REDIS_PORT;
@@ -45,7 +47,7 @@ public class EmbeddedRedisCallBack implements BeforeAllCallback, AfterAllCallbac
         String line;
 
         try (BufferedReader input =
-                     new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 
             while ((line = input.readLine()) != null) {
                 pidInfo.append(line);
