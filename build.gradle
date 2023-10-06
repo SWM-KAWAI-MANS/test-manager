@@ -29,7 +29,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-test:6.1.0'
     implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0'
     implementation 'com.github.SWM-KAWAI-MANS:spring-security-authorization-manager:1.0.0'
-    implementation 'org.springframework.boot:spring-boot-testcontainers'
+    implementation 'org.springframework.boot:spring-boot-testcontainers:3.1.0'
     implementation 'org.testcontainers:junit-jupiter:1.19.0'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.1.0'
