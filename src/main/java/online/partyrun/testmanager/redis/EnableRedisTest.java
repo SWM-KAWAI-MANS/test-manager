@@ -1,6 +1,6 @@
 package online.partyrun.testmanager.redis;
 
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(EmbeddedRedisCallBack.class)
+@Import(RedisTestConfig.class)
 public @interface EnableRedisTest {}

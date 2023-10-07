@@ -24,7 +24,7 @@ repositories {
 2. Add the jwt-manager dependency to your app-level build.gradle file:
 ```
 dependencies {
-	      testImplementation 'com.github.SWM-KAWAI-MANS:test-manager:1.0.2'
+	      testImplementation 'com.github.SWM-KAWAI-MANS:test-manager:1.1.0'
 }
 ```
 
@@ -93,3 +93,9 @@ class HelloTest {
     @MockBean FirebaseHandler firebaseHandler;
     ...
 ```
+
+## CI 환경 사용 시
+1.1.0 버전 이상부터는 redis test 시 testContainer를 활용합니다.
+따라서 CI 환경에서도 test container 환경을 설정해야 합니다.
+자세한 설명은 아래 링크를 참고하시기 바랍니다.
+https://knowledge.testcontainers.cloud/testcontainers-cloud-for-ci
